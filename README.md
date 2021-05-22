@@ -23,6 +23,6 @@ This doesn't mean that conversion has been completed.
 So, don't clear the app from background untill and unless you see the dex file in the folder in which your jar file exist.
 
 # Credits:
-Argument class is provided by @tranleduy2000 from Java N IDE.
+Argument class is provided by (tranleduy2000)[https://github.com/tranleduy2000/javaide] from Java N IDE.
 
-Runtime execution inspired from @RohitVermaOP BuildX app.
+Runtime execution inspired from (RohitVermaOP)[https://github.com/RohitVermaOP/apkbuilder-sample] BuildX app.
