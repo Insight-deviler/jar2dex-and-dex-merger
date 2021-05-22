@@ -17,9 +17,12 @@ Create a folder named Jar2Dex in the storage and add the following to it manuall
     
 # Issues:
 The Async Task window closes immediately after setting the jar file location. 
+
 This doesn't mean that conversion has been completed. 
+
 So, don't clear the app from background untill and unless you see the dex file in the folder in which your jar file exist.
 
 # Credits:
 Argument class is provided by @tranleduy2000 from Java N IDE.
+
 Runtime execution inspired from @RohitVermaOP BuildX app.
