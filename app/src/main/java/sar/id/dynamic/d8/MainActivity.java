@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 								String minApi = edittext1.getText().toString();
 										   
 								            File common = new File(Environment.getExternalStorageDirectory(),"/Jar2Dex/");
-								    File jar = new File(Environment.getExternalStorageDirectory(), "/AppProjects/BuildX/app/src/main/assets/jars/d8.jar");
+								    File jar = new File(common, "/d8.jar");
 								
 								
 								File libs = new File(common, "/android.jar");
@@ -371,4 +371,4 @@ public class MainActivity extends AppCompatActivity {
 			    }
 	}
 	
-}
+}
