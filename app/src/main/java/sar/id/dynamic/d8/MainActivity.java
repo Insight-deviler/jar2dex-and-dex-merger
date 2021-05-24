@@ -210,86 +210,7 @@ public class MainActivity extends AppCompatActivity {
 						edittext2.setText(path);
 						out = path.substring(path.lastIndexOf("/")+1);
 						outter = path.replace(out, "");
-						new AsyncTask<String, String, String>() {
-								@Override
-								protected void onPreExecute() {
-										super.onPreExecute();
-								}
-								@Override
-								protected String doInBackground(String... arg0) {
-									
-										
-								String minApi = edittext1.getText().toString();
-										   
-								            File common = new File(Environment.getExternalStorageDirectory(),"/Jar2Dex/");
-								    File jar = new File(common, "/d8.jar");
-								
-								
-								File libs = new File(common, "/android.jar");
-								
-								File classpaths = new File(common, "/rt.jar");
-								
-								
-								
-								Argument cmd = new Argument();
-								        cmd.add("dalvikvm");
-								      cmd.add("-Xcompiler-option");
-								        cmd.add("--compiler-filter=" + "speed");
-								        cmd.add("-Xmx512m");
-								
-								cmd.add("-cp", jar.toString());
-								
-								        cmd.add("com.android.tools.r8.D8");
-								        cmd.add("--release");
-								        cmd.add("--lib", libs.toString());
-								        cmd.add("--min-api", minApi);
-								           
-								           cmd.add("--output", outter);
-								           
-								           
-								        if (isJava8 = true) {
-									            cmd.add("--classpath", classpaths.toString());
-									        } else {
-									            cmd.add("--no-desugaring");
-									        }
-								            
-								        
-								        
-								        
-								        if (isIntermediate = true) {
-									            cmd.add("--intermediate");
-									        } else {
-									            
-									            
-									            
-									            
-									        }
-								            
-								            
-								        
-								        
-								        cmd.add(path);
-								        
-								        
-								
-								Runtime runtime = Runtime.getRuntime();
-								try {
-									   runtime.exec(cmd.toArray());
-									   
-								}catch(Exception e){
-									
-									e.printStackTrace();
-									textview1.setText(e.toString());
-									
-								}
-								return null;
-								}
-								@Override
-								protected void onPostExecute(String result) {
-										super.onPostExecute(result);
-										InsightUtil.showMessage(getApplicationContext(), "Completed");
-								} 
-						}.execute();
+						new d8Task().execute("run");
 					}});
 				dialog.show();
 			}
@@ -322,6 +243,17 @@ public class MainActivity extends AppCompatActivity {
 		linear5.setBackground(CRNEX);
 		checkbox2.setChecked(true);
 		checkbox1.setChecked(true);
+		
+		
+		//uncaught exceptions
+		
+		String filePath = FileUtil.getExternalStorageDir().concat("/Jar2Dex/uncaught.txt");
+		String[] cm = new String[] {"logcat", "-f", filePath, "-v","time","<MyTagNamr>:D", "*:S"};
+		try{
+			Runtime.getRuntime().exec(cm);
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -334,6 +266,119 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 	
+	private class d8Task extends AsyncTask<String, String, String>
+		
+		
+	    {
+		        ProgressDialog pd;
+		        @Override
+		        protected void onPreExecute()
+		        {
+			            pd = new ProgressDialog(MainActivity.this);
+						pd.setTitle("Please wait");
+			            pd.setMessage("D8 running...");
+			            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			            pd.setCancelable(false);
+						pd.setIndeterminate(true);
+					    
+						
+			            pd.show();
+						
+			            
+					}
+		
+		     
+				
+				
+		        @Override
+		        protected String doInBackground(String[] p1)
+		        {
+			            // add code which need to be done in background
+			
+			
+			 String minApi = edittext1.getText().toString();
+					   
+			            File common = new File(Environment.getExternalStorageDirectory(),"/Jar2Dex/");
+			       File jar = new File(common, "/d8.jar");
+			File libs = new File(common, "/android.jar");
+			
+			File classpaths = new File(common, "/rt.jar");
+			Argument cmd = new Argument();
+			
+			    cmd.add("dalvikvm");
+			      cmd.add("-Xcompiler-option");
+			        cmd.add("--compiler-filter=" + "speed");
+			        cmd.add("-Xmx512m");
+			
+			cmd.add("-cp", jar.toString());
+			
+			        cmd.add("com.android.tools.r8.D8");
+			        
+			        
+			        cmd.add("--release");
+			        cmd.add("--lib", libs.toString());
+			        cmd.add("--min-api", minApi);
+			           
+			           cmd.add("--output", outter);
+			           
+			           cmd.add("--classpath", classpaths.toString());
+			           
+			           
+			     if (isJava8 = true) {
+				            cmd.add("--classpath", classpaths.toString());
+				        } else {
+				            cmd.add("--no-desugaring");
+				        }
+			            
+			        
+			        
+			     if (isIntermediate = true) {
+				            cmd.add("--intermediate");
+				        } else {
+				            
+				            
+				            
+				            
+				        }
+			            
+			        
+			        
+			        cmd.add(path);
+			        
+			        try{
+				
+				RuntimeExecution sh = new RuntimeExecution();
+						sh.exec(cmd.toArray());
+				   
+			}catch(Exception e){
+				
+				e.printStackTrace();
+				textview1.setText(e.toString());
+				
+			}
+			return null;
+			            
+			            
+			
+			        
+			        }
+		        
+		
+			
+				
+				
+		        @Override
+		        protected void onPostExecute(String result)
+		        {
+			            super.onPostExecute(result);
+						Toast.makeText(MainActivity.this, "Completed!",
+									   Toast.LENGTH_LONG).show();
+			            pd.dismiss();
+						
+			        }
+		
+		   
+	}
 	
 
 //This Argument class is from the source of JavaNIDE app
