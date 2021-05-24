@@ -1,3 +1,6 @@
+
+// This class is provided by Agus JCoderz. All rights are owned by him or by their associate
+
 package sar.id.dynamic.d8;
 
 import  java.io.File;
