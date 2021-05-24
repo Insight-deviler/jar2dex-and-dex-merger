@@ -13,14 +13,10 @@ Create a folder named Jar2Dex in the storage and add the following to it manuall
     1. Set the Min-API depending on the library you use, the default one is 19.
     2. Choose the library file by clicking the fab.
     3. The output location is same as the input location.
-    4. Wait for few minutes, the app doesn't show any visuals for processing. You can put the app in background, don't clear it from background
+    4. Wait for few minutes, until the dialog closes.
     
-# Issues:
-The Async Task window closes immediately after setting the jar file location. 
-
-This doesn't mean that conversion has been completed. 
-
-So, don't clear the app from background untill and unless you see the dex file in the folder in which your jar file exist.
+# Fixed Issues:
+Improved the function of Async task with dialog
 
 # Credits:
 Argument class is provided by [tranleduy2000](https://github.com/tranleduy2000/javaide)from Java N IDE.
