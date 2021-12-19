@@ -13,12 +13,13 @@ This app works by loading the d8 library dynamically using runtime execution.
 Now the app can do the below functions except adding android.jar file 
                                 (or)
 Create a folder named Jar2Dex in the storage and add the following to it manually:
-    1. [D8 library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/d8s.jar)
-    2. [Merger library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/merge.jar)
-    3. [Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
+
+     [D8 library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/d8s.jar)
+     [Merger library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/merge.jar)
+     [Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
     All the above are present in the assets folder of the app
     
-    4. Android.jar 
+     Android.jar 
     Get it from android studio or from this page itself, [click me](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/android.jar)
     
 # Usage:
