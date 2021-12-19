@@ -1,11 +1,9 @@
 # Jar2Dex and Dex merger
 Jar2Dex is an android application for 
 
-    1. Merging dex files.
-    
-    2. Convert .jar and .classes file to dex
-    
-    3. Convert a folder containing .jar or .classes to dex
+    1. Merging dex files.    
+    2. Convert .jar and .classes file to dex.   
+    3. Convert a folder containing .jar or .classes to dex.
     
 # Information
 The app needs android 8+ devices for converting jar to dex due to the limitations of D8 library
@@ -17,7 +15,7 @@ This app works by loading the d8 library dynamically using runtime execution.
 
 Now the app can do the below functions except adding android.jar file 
 
-                                (or)
+(or)
                                 
 Create a folder named Jar2Dex in the storage and add the following to it manually:
 
