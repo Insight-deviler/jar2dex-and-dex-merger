@@ -1,5 +1,6 @@
 # Jar2Dex and Dex merger
 Jar2Dex is an android application for 
+
     1. Merging dex files.
     2. Convert .jar and .classes file to dex
     3. Convert a folder containing .jar or .classes to dex
@@ -14,13 +15,12 @@ Now the app can do the below functions except adding android.jar file
                                 (or)
 Create a folder named Jar2Dex in the storage and add the following to it manually:
 
-     [D8 library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/d8s.jar)
-     [Merger library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/merge.jar)
-     [Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
+[D8 library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/d8s.jar)
+[Merger library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/merge.jar)
+[Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
     All the above are present in the assets folder of the app
-    
-     Android.jar 
-    Get it from android studio or from this page itself, [click me](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/android.jar)
+[Android.jar](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/android.jar)
+    Get it from android studio or from this page itself.
     
 # Usage:
     1. Set the Min-API depending on the library you use, the default one is 19.
