@@ -89,21 +89,7 @@
 			android:textColor="#000000"
 			android:layout_weight="1" />
 	</LinearLayout>
-	<LinearLayout
-		android:id="@+id/linear6"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:padding="8dp"
-		android:orientation="horizontal">
-		<TextView
-			android:id="@+id/textview2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:padding="8dp"
-			android:text="Information:\n1. You can add as many Dex file for merging until it reach 64k limit.\n2. I have used only 3 Dex for easy tutoring.\n3. leave one location empty if you have only 2 Dex file.\n\n--Insight Deviler"
-			android:textSize="12sp"
-			android:textColor="#000000" />
-	</LinearLayout>
+	
 	<LinearLayout
 		android:id="@+id/linear7"
 		android:layout_width="match_parent"

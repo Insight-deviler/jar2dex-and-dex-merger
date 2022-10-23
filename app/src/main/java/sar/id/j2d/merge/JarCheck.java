@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
 //used to check the java version of a JAR file
-
 public final class JarCheck {
 
     private static final int chunkLength = 8;

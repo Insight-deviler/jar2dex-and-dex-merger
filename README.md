@@ -8,7 +8,7 @@ Jar2Dex is an android application for
 # Information
 The app needs android 8+ devices for converting jar to dex due to the limitations of D8 library
 
-For merging dex files there is no such limitations and may work in all android versions
+For merging dex files there is no such limitations(but can't compile java 8 codes) and may work in all android versions
 
 # How it works?
 This app works by loading the d8 library dynamically using runtime execution.
