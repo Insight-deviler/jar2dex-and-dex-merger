@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +89,7 @@ public class MainActivity extends Activity {
 			mergedDex = dex1.replace(output, "merged.dex");
 			edittext4.setText(mergedDex);
 			new mergeTask().execute("run");
+			startService();
 		});
 
 		button2.setOnClickListener(_view -> {
@@ -161,11 +164,19 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(String string2) {
 			super.onPostExecute(string2);
-
-			Toast.makeText(MainActivity.this, "Completed!",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this, "Completed!",Toast.LENGTH_LONG).show();
 			pd.dismiss();
+			stopService();
 
 		}
+	}
+	public void startService() {
+		Intent serviceIntent = new Intent(this, ForegroundService.class);
+		serviceIntent.putExtra("inputExtra", "Merging Started...");
+		ContextCompat.startForegroundService(this, serviceIntent);
+	}
+	public void stopService() {
+		Intent serviceIntent = new Intent(this, ForegroundService.class);
+		stopService(serviceIntent);
 	}
 }
