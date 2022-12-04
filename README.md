@@ -11,18 +11,11 @@ The app needs android 8+ devices for converting jar to dex due to the limitation
 
 For merging dex files there is no such limitations(but can't compile java 8 codes) and may work in all android versions
 
-# How it works?
-This app works by loading the d8 library dynamically using runtime execution.
-
-Now the app can do the below functions except adding android.jar file 
+The app can create a folder of its own and copy the rt.jar file to it but not android.jar file
 
 (or)
-                                
+
 Create a folder named Jar2Dex in the storage and add the following to it manually:
-
-[D8 library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/d8s.jar)
-
-[Merger library](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/merge.jar)
 
 [Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
 
@@ -37,10 +30,6 @@ Create a folder named Jar2Dex in the storage and add the following to it manuall
     1. Set the Min-API depending on the library you use, the default one is 19.
     2. The output location is same as the input location.
     3. Wait for few minutes, until the dialog closes.
- 
-[Demo app](https://github.com/Insight-deviler/jar2dex-and-dex-merger/releases/download/v1/Jar2Dex.apk) is also provided for easy using(If you don't have time for compiling codes)
-    
+
 # Credits:
 Argument class is provided by [tranleduy2000](https://github.com/tranleduy2000/javaide)from Java N IDE.
-
-Runtime execution inspired from [RohitVermaOP](https://github.com/RohitVermaOP/apkbuilder-sample)BuildX app.
