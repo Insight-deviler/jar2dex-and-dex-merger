@@ -9,13 +9,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,18 +110,7 @@ public class MainActivity extends Activity {
 			FileUtil.makeDir(FileUtil.getExternalStorageDir().concat("/Jar2Dex"));
 			ApplicationUtil.showMessage(getApplicationContext(), "Directory created...");
 		}
-		String jarPath = FileUtil.getExternalStorageDir().concat("/Jar2Dex/merge.jar");
-		if (FileUtil.isExistFile(FileUtil.getExternalStorageDir().concat("/Jar2Dex/merge.jar"))) {
 
-		} else {
-			try {
-				copyAssetFile("fonts/merge.jar", jarPath);
-				ApplicationUtil.showMessage(getApplicationContext(), "Merger.jar copied successfully!");
-			} catch (java.io.IOException e) {
-				textview1.setText(e.toString());
-			}
-
-		}
 	}
 	private class mergeTask extends AsyncTask<String, String, String> {
 		ProgressDialog pd;
@@ -142,20 +131,9 @@ public class MainActivity extends Activity {
 		protected String doInBackground(String[] p1) {
 			// add code which need to be done in background
 			java.io.File jars = new java.io.File(Environment.getExternalStorageDirectory(), "/Jar2Dex/merge.jar");
-
-
-			//merge.jar is nothing but dalvik dx library 
-
+			//merge.jar is nothing but dalvik dx library
 			List<String> cmd = new ArrayList<String>();
-			cmd.add("dalvikvm");
-			cmd.add("-Xcompiler-option");
-			cmd.add("--compiler-filter=" + "speed");
-			cmd.add("-Xmx512m");
-			cmd.add("-cp");
-			cmd.add(jars.toString());
-			cmd.add("com.android.dx.merge.DexMerger");
 			cmd.add(mergedDex);
-
 			if (dex1.equals("")) {
 
 			} else {
@@ -172,24 +150,10 @@ public class MainActivity extends Activity {
 			} else {
 				cmd.add(dex3);
 			}
-
-
 			try {
-
-				java.lang.ProcessBuilder pb = new java.lang.ProcessBuilder(cmd);
-				java.lang.Process process = pb.start();
-				//this below code is for writing input process
-				java.io.BufferedReader stdInput = new java.io.BufferedReader(new java.io.InputStreamReader(process.getInputStream()));
-				String s = null;
-				while ((s = stdInput.readLine()) != null) {
-					FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/Jar2Dex/process.txt"), s);
-
-				}
-			} catch (Exception e) {
-
+				com.android.dx.merge.DexMerger.main(cmd.toArray(new String[0]));
+			} catch (IOException e) {
 				e.printStackTrace();
-				textview1.setText(e.toString());
-
 			}
 			return null;
 		}
@@ -203,14 +167,5 @@ public class MainActivity extends Activity {
 			pd.dismiss();
 
 		}
-	}
-	public void copyAssetFile(String assetFilePath, String destinationFilePath) throws java.io.IOException {
-		java.io.InputStream in = getApplicationContext().getAssets().open(assetFilePath);
-		java.io.OutputStream out = new java.io.FileOutputStream(destinationFilePath);
-		byte[] buf = new byte[1024];
-		int len;
-		while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
-		in.close();
-		out.close();
 	}
 }

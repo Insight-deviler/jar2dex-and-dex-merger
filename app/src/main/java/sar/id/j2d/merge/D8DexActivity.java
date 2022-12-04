@@ -17,6 +17,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,66 +91,25 @@ public class D8DexActivity extends Activity {
 	
 	private void initializeLogic() {
 		setTitle("D8 dexer");
-		d8lib = FileUtil.getExternalStorageDir().concat("/Jar2Dex/d8s.jar");
-		if (FileUtil.isExistFile(d8lib)) {
-			
-		}
-		else {
-			try{
-				copyAssetFile("fonts/d8s.jar", d8lib);
-				ApplicationUtil.showMessage(getApplicationContext(), "d8.jar copied successfully!");
-			}catch (java.io.IOException e){
-								log1.setText(e.toString());
-					}
-				
-			
-		}
 		//check for android.jar
 		if (FileUtil.isExistFile(FileUtil.getExternalStorageDir().concat("/Jar2Dex/android.jar"))) {
 			libs = FileUtil.getExternalStorageDir().concat("/Jar2Dex/android.jar");
-		}
-		else {
+		} else {
 			ApplicationUtil.showMessage(getApplicationContext(), "android.jar file is missing. Please download it from my GitHub page  or get it from Android studio");
 			button1.setEnabled(false);
 		}
 		//check for rt.jar
 		rtss = FileUtil.getExternalStorageDir().concat("/Jar2Dex/rt.jar");
 		if (FileUtil.isExistFile(rtss)) {
-			
-		}
-		else {
-			try{
+
+		} else {
+			try {
 				copyAssetFile("fonts/rtjar.jar", rtss);
 				ApplicationUtil.showMessage(getApplicationContext(), "rt.jar copied successfully!");
-				}catch (java.io.IOException e){
-								log1.setText(e.toString());
-					}
-		}
-		java.io.OutputStream _os = new java.io.OutputStream() {
-			StringBuilder mCache;
-			@Override
-			public void write(int b) {
-				if(mCache == null) mCache = new StringBuilder();
-				if(((char) b) == '\n'){
-					final String _print = mCache.toString();
-											
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							log1.append("\n");
-							log1.append(_print);
-						}
-					});
-											
-					mCache = new StringBuilder();
-				}else{
-					mCache.append((char)b);
-				}
+			} catch (java.io.IOException e) {
+				log1.setText(e.toString());
 			}
-		};
-		
-		System.setOut(new java.io.PrintStream(_os));
-		System.setErr(new java.io.PrintStream(_os));
+		}
 	}
 	
 	@Override
@@ -180,9 +141,11 @@ public class D8DexActivity extends Activity {
 				//execution of task
 				if (JarCheck.checkJar(path, 44, 51)) {
 					new d8Task().execute("run");
+					startService();
 				}
 				else {
 					new d8Task().execute("run");
+					startService();
 					ApplicationUtil.showMessage(getApplicationContext(), "Java 8 file");
 				}
 			}
@@ -217,24 +180,12 @@ public class D8DexActivity extends Activity {
 			            pd.show();
 					}
 		        @Override
-		        protected String doInBackground(String[] p1)
-		        {
-			            // add code which need to be done in background
-			
-			
+		        protected String doInBackground(String[] p1){
+					// add code which need to be done in background
 			 String minApi = edittext3.getText().toString();
-					   
 			 java.io.File common = new java.io.File(Environment.getExternalStorageDirectory(),"/Jar2Dex/");
-			 java.io.File jar = new java.io.File(common, "/d8s.jar");
 			 java.io.File classpaths = new java.io.File(common, "/rt.jar");
 			 List<String> cmd= new ArrayList<String>();
-			 	cmd.add("dalvikvm");
-			    cmd.add("-Xcompiler-option");
-			    cmd.add("--compiler-filter=" + "speed");
-			    cmd.add("-Xmx512m");
-				cmd.add("-cp");
-				cmd.add(jar.toString());
-			    cmd.add("com.android.tools.r8.D8");
 			    cmd.add("--release");
 				cmd.add("--lib");
 			    cmd.add(libs);
@@ -246,24 +197,13 @@ public class D8DexActivity extends Activity {
 				cmd.add(classpaths.toString());
 				cmd.add("--intermediate");
 				cmd.add(path);
+
 			try {
 				// this is for doing the execution
-				java.lang.ProcessBuilder pbs = new java.lang.ProcessBuilder(cmd);
-				java.lang.Process proces = pbs.start();
-				//this below code is for writing input process
-				java.io.BufferedReader StdInput= new java.io.BufferedReader(new java.io.InputStreamReader(proces.getInputStream()));
-						String st = null;
-				while ((st = StdInput.readLine()) != null) {
-							    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/Jar2Dex/d8process.txt"), st);
-							    
-							    } 
-				
+				com.android.tools.r8.D8.main(cmd.toArray(new String[0]));
 			}catch(Exception e){
-				
 				e.printStackTrace();
 				log1.setText(e.toString());
-				
-				
 			}
 			return null;
 		}
@@ -276,7 +216,17 @@ public class D8DexActivity extends Activity {
 			
 			log1.setText("Error log");
 			            pd.dismiss();
+						stopService();
 						
 			        }
+	}
+	public void startService() {
+		Intent serviceIntent = new Intent(this, ForegroundService.class);
+		serviceIntent.putExtra("inputExtra", out+" is being converted");
+		ContextCompat.startForegroundService(this, serviceIntent);
+	}
+	public void stopService() {
+		Intent serviceIntent = new Intent(this, ForegroundService.class);
+		stopService(serviceIntent);
 	}
 }

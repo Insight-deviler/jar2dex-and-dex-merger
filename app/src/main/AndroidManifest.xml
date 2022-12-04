@@ -3,6 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	package="sar.id.j2d.merge">
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
 		tools:ignore="ScopedStorage" />
@@ -28,6 +29,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
 		<activity
 			android:name=".D8DexActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
@@ -45,5 +47,9 @@
 		<activity
 			android:name=".DebugActivity"
 			android:screenOrientation="fullSensor" />
+		<service
+			android:name=".ForegroundService"
+			android:enabled="true"
+			android:exported="true" />
 	</application>
 </manifest>
