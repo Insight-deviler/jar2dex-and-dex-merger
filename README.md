@@ -11,8 +11,10 @@ The app needs android 8+ devices for converting jar to dex due to the limitation
 
 For merging dex files there is no such limitations(but can't compile java 8 codes) and may work in all android versions
 
+The app can create a folder of its own and copy the rt.jar file to it but not android.jar file
+
 (or)
-                                
+
 Create a folder named Jar2Dex in the storage and add the following to it manually:
 
 [Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
