@@ -19,7 +19,7 @@ Create a folder named Jar2Dex in the storage and add the following to it manuall
 
 [Core lambda library (Rt.jar)](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/app/src/main/assets/fonts/rtjar.jar)
 
-    All the above are present in the assets folder of the app
+    rt.jar is present within the app's assets folder
     
 [Android.jar](https://github.com/Insight-deviler/jar2dex-and-dex-merger/blob/main/android.jar)
 
